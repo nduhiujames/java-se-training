@@ -14,11 +14,11 @@ public class AppTest {
     @Test
     void add(){
         //when
-        int result=app.add(0, 0);
+        int result=app.add(25, 10);
         //then
-        int expected=5;
+        int expected=35;
         //verify that results =expected
-        Assertions.assertEquals(expected, result, "The sum of 2 + 3 should be 5");
+        Assertions.assertEquals(expected, result, "The sum of 25 + 10 should be 35");
 
 
 
