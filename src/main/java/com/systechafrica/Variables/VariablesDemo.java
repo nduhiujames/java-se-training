@@ -4,69 +4,80 @@ import java.util.concurrent.atomic.LongAccumulator;
 import java.util.logging.Logger;
 
 public class VariablesDemo {
-    private static final Logger LOGGER=Logger.getLogger(VariablesDemo.class.getName());
-    private  void variableDeclarations() {
-    //integer variable
-    //? type variableName
-    int score=0;
-    LOGGER.info("Score integer variable value is " + score);
-}
-private void constantsVariables() {
-    //constant variable
-    //?final type variableName=value;
-    final double PI=3.14159;
-    LOGGER.info("Constant variable PI= " + PI);
-} 
+    private static final Logger LOGGER = Logger.getLogger(VariablesDemo.class.getName());
 
-   private void integerTypes(){
-    variableDeclarations();
+    private void variableDeclarations() {
+        // integer variable
+        // ? type variableName
+        int score = 0;
+        LOGGER.info("Score integer variable value is " + score);
+    }
 
-    LOGGER.info("Integer Minimum " + Integer.MIN_VALUE);
-    LOGGER.info("Integer Maximum " + Integer.MAX_VALUE);
+    private void constantsVariables() {
+        // constant variable
+        // ?final type variableName=value;
+        final double PI = 3.14159;
+        LOGGER.info("Constant variable PI= " + PI);
+    }
 
-    LOGGER.info("Long Minimum " + Long.MIN_VALUE);
-    LOGGER.info("Long Maximum " + Long.MAX_VALUE);
+    private void integerTypes() {
 
-   }
-   private void floatingTypes(){
-    //float types
-    float floatRate=2.14574546F;
-    double doubleRate=2.14574546;
-    LOGGER.info("float value " + floatRate);
-    LOGGER.info("double value " + doubleRate);
-   }
-      private void characterTypes(){
-    //character types
-    char grade='A';
-    
-    LOGGER.info("character value " + grade);
-   }
-   private void booleanTypes(){
-    //boolean types
-    boolean isPromoted=false;
-    boolean isProcessed=true;
-    
-    LOGGER.info("false value " + isPromoted);
-    LOGGER.info("true value " + isProcessed);
-   }
-   
+        LOGGER.info("Integer Minimum " + Integer.MIN_VALUE);
+        LOGGER.info("Integer Maximum " + Integer.MAX_VALUE);
 
-   public static void main(String[] args) {
-    VariablesDemo demo=new VariablesDemo();
+        LOGGER.info("Long Minimum " + Long.MIN_VALUE);
+        LOGGER.info("Long Maximum " + Long.MAX_VALUE);
+        // byte, short, int, long
+        // ?Wrapper classes
 
-    demo.variableDeclarations();
-    
-    demo.constantsVariables();
+        byte aPrimitive = 23;
+        Byte aWrapper = 23;
+        int a = aWrapper.intValue();
 
-    demo.integerTypes();
-    
-    demo.floatingTypes();
+        LOGGER.info("byte primitive " + aPrimitive);
+        LOGGER.info("Byte wrapper " + aWrapper);
+        LOGGER.info("Integer value from Byte wrapper " + a);
 
-    demo.characterTypes();
-    
-    demo.booleanTypes();
-   }
+    }
 
+    private void floatingTypes() {
+        // float types
+        float floatRate = 2.14574546F;
+        double doubleRate = 2.14574546;
+        LOGGER.info("float value " + floatRate);
+        LOGGER.info("double value " + doubleRate);
+    }
 
+    private void characterTypes() {
+        // character types
+        char grade = 'A';
+
+        LOGGER.info("character value " + grade);
+    }
+
+    private void booleanTypes() {
+        // boolean types
+        boolean isPromoted = false;
+        boolean isProcessed = true;
+
+        LOGGER.info("false value " + isPromoted);
+        LOGGER.info("true value " + isProcessed);
+    }
+
+    public static void main(String[] args) {
+        VariablesDemo demo = new VariablesDemo();
+
+        demo.variableDeclarations();
+
+        demo.constantsVariables();
+
+        demo.integerTypes();
+
+        demo.floatingTypes();
+
+        demo.characterTypes();
+
+        demo.booleanTypes();
+    }
 
 }
