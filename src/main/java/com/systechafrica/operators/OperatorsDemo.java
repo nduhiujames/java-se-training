@@ -7,7 +7,9 @@ public class OperatorsDemo {
     private static final Logger LOGGER= Logger.getLogger(OperatorsDemo.class.getName());
 
     private void arithmeticOperators(){
-       
+        
+
+
         int studentOneAge=21;
         int studentTwoAge=19;
 
@@ -35,13 +37,32 @@ public class OperatorsDemo {
 
         
     }
+    private void assignmentOperators(){
+        //simple assignment operator
+        int quantity=35;
+        //addition assignment operator
+        quantity+=10;//> quantity=quantity+10
+        LOGGER.info("Quantity " + quantity);
+
+        //multiplication assignment operator
+        quantity*=100;
+        LOGGER.info("Quantity " + quantity);
+
+         quantity/=20;
+        LOGGER.info("Quantity " + quantity);
+
+
+    }
 
 
     public static void main(String[] args) {
         OperatorsDemo app=new OperatorsDemo();
         app.arithmeticOperators();
+        app.assignmentOperators();
+        
 
         
     }
+
     
 }
