@@ -38,6 +38,15 @@ public class VariablesDemo {
         LOGGER.info("Byte wrapper " + aWrapper);
         LOGGER.info("Integer value from Byte wrapper " + a);
 
+        // short
+        short s = 23;
+        Short aShort = 23;
+        // integer
+        int c = 23;
+        Integer aInt = 23;
+        // long
+        long d = 23;
+        Long aLong = 23L;
     }
 
     private void floatingTypes() {
@@ -46,6 +55,13 @@ public class VariablesDemo {
         double doubleRate = 2.14574546;
         LOGGER.info("float value " + floatRate);
         LOGGER.info("double value " + doubleRate);
+        // float
+        float price = 0.2365F;
+        Float priceFloat = 0.2365F;
+        // double
+        double prtPrice = 0.2365;
+        Double pricDouble = 0.2365;
+
     }
 
     private void characterTypes() {
@@ -53,6 +69,9 @@ public class VariablesDemo {
         char grade = 'A';
 
         LOGGER.info("character value " + grade);
+
+        // character type
+        Character characterGrade = 'F';
     }
 
     private void booleanTypes() {
@@ -78,6 +97,10 @@ public class VariablesDemo {
         demo.characterTypes();
 
         demo.booleanTypes();
+
+        long a = 2147483648L;
+        int b = (int) a;
+         LOGGER.info("int b value " + b);
     }
 
 }
