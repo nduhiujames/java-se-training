@@ -75,23 +75,58 @@ public class OperatorsDemo {
          boolean isStudentOneAgeGreaterThanStudentTwoAge=studentOneAge>studentTwoAge;
          LOGGER.info("isStudentOneAgeGreaterThanStudentTwoAge " + isStudentOneAgeGreaterThanStudentTwoAge);
 
-         //inequality operator
+         //LessThanEqual operator
          boolean isStudentOneAgeLessThanEqualStudentTwoAge=studentOneAge<=studentTwoAge;
          LOGGER.info("isStudentOneAgeLessThanEqualStudentTwoAge " + isStudentOneAgeLessThanEqualStudentTwoAge);
 
-         //inequality operator
+         //>= operator
          boolean isStudentOneAgeGreaterThanEqualStudentTwoAge=studentOneAge>=studentTwoAge;
          LOGGER.info("isStudentOneAgeGreaterThanEqualStudentTwoAge " + isStudentOneAgeGreaterThanEqualStudentTwoAge);
 
         
     }
 
+    private void andlogicalOperator(){
+
+        int studentOneAge=20;
+        int studentTwoAge=25;
+
+        boolean isStudentOneAllowed=studentOneAge>=18;
+        boolean isStudentTwoAllowed=studentTwoAge>=18;
+
+        // and operator
+        if(isStudentOneAllowed && isStudentTwoAllowed){
+          LOGGER.info("All students alllowed for ID Registration ");  
+        }else{
+          LOGGER.info("Not alllowed for ID Registration ");   
+        }
+         
+
+    }
+    private void orlogicalOperator(){
+
+        int studentOneAge=17;
+        int studentTwoAge=25;
+
+        boolean isStudentOneAllowed=studentOneAge>=18;
+        boolean isStudentTwoAllowed=studentTwoAge>=18;
+
+        // and operator
+        if(!isStudentOneAllowed || isStudentTwoAllowed){
+          LOGGER.info("All students alllowed for ID Registration ");  
+        }else{
+          LOGGER.info("Not alllowed for ID Registration ");   
+        }
+         
+
+    }
     public static void main(String[] args) {
         OperatorsDemo app=new OperatorsDemo();
         app.arithmeticOperators();
         app.assignmentOperators();
         app.comparisonOperators();
-        
+        app.andlogicalOperator();
+        app.orlogicalOperator();
 
         
     }
