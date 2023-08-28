@@ -24,11 +24,27 @@ public class LoopingStatements {
 
 
     }
+    public void whileLoop(){
+        int studentCount=0;
+        while (studentCount<10){
+            LOGGER.info("Student Count= " + studentCount);
+            studentCount++;
 
+        }
+        
+        }
+    public void doWhileLoop(){
+
+        int studentCount = 0;
+        do{
+            LOGGER.info("Student Count = " + studentCount);
+            studentCount++;
+        } while (studentCount < 10);
+        }
     public static void main(String[] args) {
         LoopingStatements app=new LoopingStatements();
         app.forLoop();
-        
+        app.whileLoop();
     }
     
 }
