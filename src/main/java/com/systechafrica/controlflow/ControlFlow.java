@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 import com.systechafrica.operators.OperatorsDemo;
 
 public class ControlFlow {
-    private static final Logger LOGGER= Logger.getLogger(OperatorsDemo.class.getName());
+    private static final Logger LOGGER= Logger.getLogger(ControlFlow.class.getName());
 
     public void ifelseStatement(){
     
@@ -46,6 +46,8 @@ public class ControlFlow {
              case"SUNDAY":
             LOGGER.info("Sherehe ");
             break;
+            default:
+            LOGGER.info("please specify a valid day");
 
         }
 
