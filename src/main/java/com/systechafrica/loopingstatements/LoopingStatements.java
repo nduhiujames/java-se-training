@@ -39,12 +39,38 @@ public class LoopingStatements {
         do{
             LOGGER.info("Student Count = " + studentCount);
             studentCount++;
-        } while (studentCount < 10);
+        } while (studentCount <= 10);
         }
+    public void breakJumpStatements(){
+        LOGGER.info("Before my loop ");
+        for (int index =0; index < 10; index++){
+            if (index == 5){
+                break;
+            }
+            LOGGER.info("My index is"+ index);
+        }
+        LOGGER.info("After my loop ");
+
+}
+    public void continueJumpStatements(){
+         LOGGER.info("Before my loop ");
+        for (int index =0; index < 10; index++){
+            if (index == 5){
+                continue;
+            }
+            LOGGER.info("My index is"+ index);
+        }
+        LOGGER.info("After my loop ");
+
+    }
+
     public static void main(String[] args) {
         LoopingStatements app=new LoopingStatements();
         app.forLoop();
         app.whileLoop();
+        app.breakJumpStatements();
+        app.continueJumpStatements();
     }
+
     
 }
