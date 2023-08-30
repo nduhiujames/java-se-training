@@ -67,8 +67,18 @@ public class ATMSimulator {
                     }
                     break;
                 case 4:
-                    System.out.println("Transfer Cash option is not implemented in this version.");
-                    break;
+                System.out.print("Enter the account number To Transfer Funds: ");
+                int accountNumber = scanner.nextInt();
+                System.out.print("Enter the amount to transfer: ");
+                double transferAmount = scanner.nextDouble();
+                if (transferAmount <= balance) {
+                    balance -= transferAmount;
+                    System.out.println("Transferred: Ksh " + transferAmount + " to account " + accountNumber);
+                } else {
+                    System.out.println("Insufficient balance.");
+                }
+                break;
+                    
                 case 5:
                     System.out.println("Exiting ATM simulator. Have a nice day!");
                     return;
