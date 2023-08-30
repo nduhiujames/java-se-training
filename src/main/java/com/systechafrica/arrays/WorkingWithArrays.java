@@ -16,6 +16,8 @@ public class WorkingWithArrays {
         LOGGER.info(nickNames[0]);
         LOGGER.info(nickNames[1]);
         LOGGER.info(nickNames[2]);
+
+
         
 
 
