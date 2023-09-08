@@ -104,7 +104,7 @@ public class ATMDemo {
     }
 
     public void performTransfer() {
-        System.out.println("Transfer Cash not available for now.");
+        System.out.println("Transfer Cash not.");
 
     }
 
