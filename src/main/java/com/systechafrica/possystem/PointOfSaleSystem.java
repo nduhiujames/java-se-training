@@ -61,21 +61,23 @@ public class PointOfSaleSystem {
     }
 
     public void displayReceipt() {
-        System.out.printf("%-10s %-8s %-12s %-10s%n", "Item Code", "Quantity", "Unit Price", "TotalValue");
+        System.out.println("Item Code\tQuantity\tUnit Price\tTotalValue");
         for (MenuItem menuItem : cart) {
-            System.out.printf("%-10s %-8d %-12.2f %-10.2f%n",
+            System.out.printf("%-10s\t%-8d\t%-11.2f\t%-10.2f%n",
                     menuItem.getItemCode(), menuItem.getQuantity(),
                     menuItem.getUnitPrice(), menuItem.getTotalValue());
         }
-
+        
         double totalDue = cart.stream()
                 .mapToDouble(MenuItem::getTotalValue)
                 .sum();
-
+        
+        System.out.println("Total:");
+        System.out.printf("%-10s\t%-8s\t%-11s\t%-10.2f%n", "", "", "", totalDue);
         System.out.println("*********************************************************");
-        System.out.printf("Total:%33.2f%n", totalDue);
         System.out.println("*********************************************************");
     }
+    
 
     public static void main(String[] args) {
         User user = new User();
