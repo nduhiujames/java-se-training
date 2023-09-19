@@ -8,6 +8,7 @@ public class SoftwareEngineer extends Employee {
         //TODO Auto-generated constructor stub
     }
 
+    
     private String title;
 
     public String getTitle() {
