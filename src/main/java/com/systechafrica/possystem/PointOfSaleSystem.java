@@ -46,13 +46,19 @@ public class PointOfSaleSystem {
             totalDue += menuItem.getTotalValue();
         }
 
-        System.out.println("Total:");
+        System.out.println("Total Due: $" + totalDue);
         System.out.println("*********************************************************");
         System.out.print("Enter the amount given by Customer: ");
         double amountGiven = scanner.nextDouble();
+
+        if (amountGiven < totalDue) {
+            System.out.println("Insufficient payment. Please provide enough funds.");
+            return;
+        }
+
         double change = amountGiven - totalDue;
 
-        System.out.println("Change: " + change);
+        System.out.println("Change: $" + change);
         System.out.println("*********************************************************");
         System.out.println("THANK YOU FOR SHOPPING WITH US");
         System.out.println("*********************************************************");
@@ -67,17 +73,15 @@ public class PointOfSaleSystem {
                     menuItem.getItemCode(), menuItem.getQuantity(),
                     menuItem.getUnitPrice(), menuItem.getTotalValue());
         }
-        
+
         double totalDue = cart.stream()
                 .mapToDouble(MenuItem::getTotalValue)
                 .sum();
-        
-        System.out.println("Total:");
-        System.out.printf("%-10s\t%-8s\t%-11s\t%-10.2f%n", "", "", "", totalDue);
+
+        System.out.println("Total Due: $" + totalDue);
         System.out.println("*********************************************************");
         System.out.println("*********************************************************");
     }
-    
 
     public static void main(String[] args) {
         User user = new User();
