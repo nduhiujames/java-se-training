@@ -36,7 +36,7 @@ public class PointOfSaleSystem {
 
     private void logMessage(Level level, String message, Exception e) {
         try {
-            FileHandler fileHandler = new FileHandler("log.txt", true);
+            FileHandler fileHandler = new FileHandler("log1.txt", true);
             logger.addHandler(fileHandler);
             SimpleFormatter formatter = new SimpleFormatter();
             fileHandler.setFormatter(formatter);

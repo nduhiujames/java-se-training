@@ -1,0 +1,6 @@
+Sep 29, 2023 8:06:21 PM com.systechafrica.posreviewed.PointOfSaleSystem logMessage
+INFO: Item added: 23
+Sep 29, 2023 8:06:30 PM com.systechafrica.posreviewed.PointOfSaleSystem logMessage
+INFO: Item added: 23
+Sep 29, 2023 8:06:39 PM com.systechafrica.posreviewed.PointOfSaleSystem logMessage
+INFO: Item added: 7788
