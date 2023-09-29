@@ -3,6 +3,8 @@ package com.systechafrica.part2.jdbc;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class MysqlDataAccess implements DataAccess{
     public MysqlDataAccess(){
@@ -16,19 +18,31 @@ public class MysqlDataAccess implements DataAccess{
     }
         
 
-   
+   @Override
+  
+    public Connection connect() {
+         try{ 
+        Connection connection=DriverManager.getConnection("url", "username", "passord");
+         return connection;
+        } catch (SQLException e){
+          System.out.println(e.getMessage());  
+         return null;
+    
+        }
 
-  //  @Override
-    //public Connection connect() {
-        //Connection connection=DriverManager.getConnection(null, null, null)
-
-    //}
+    }
   
 
     @Override
     public ResultSet executeQuery(String query) {
-        
-        return null;
+        try{
+            Statement statement = connect().createStatement();
+            ResultSet resultSet=statement.executeQuery(query);
+            return resultSet;
+         } catch(SQLException e){
+            System.out.println(e.getMessage());
+            return null;
+         }
     }
 
     @Override
@@ -42,13 +56,4 @@ public class MysqlDataAccess implements DataAccess{
         
     }
 
-
-
-
-    @Override
-    public Connection connect() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'connect'");
-    }
-    
 }
