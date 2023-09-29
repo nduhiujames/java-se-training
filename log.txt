@@ -1,3 +1,0 @@
-main|INFO|Info message logging
-main|SEVERE|error message logging
-main|WARNING|warning message logging
