@@ -1,6 +1,7 @@
 package com.systechafrica.part3.logging;
 
 import java.io.IOException;
+import java.time.Instant;
 import java.util.logging.*;
 
 import com.systechafrica.controlflow.ControlFlow;
@@ -30,7 +31,8 @@ public class FileLogging {
             String level=record.getLevel().getName();
             String message=record.getMessage();
             System.out.println(record.getMessage());
-            return method+ "|"+level+ "|"+message;
+            Instant instant =record.getInstant();
+            return instant+ "|"+method+"|"+level+ "|"+message;
         }
 
     }
