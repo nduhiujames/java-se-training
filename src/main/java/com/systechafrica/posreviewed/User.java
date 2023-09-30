@@ -14,7 +14,7 @@ public class User {
     public User() {
         this.password = DEFAULT_PASSWORD;
         this.loginAttempts = 0;
-    } 
+    }
 
     public boolean login() throws PointOfSaleException {
         Scanner scanner = new Scanner(System.in);
