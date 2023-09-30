@@ -142,6 +142,7 @@ public class PointOfSaleSystem {
                 String insertUserQuery = "INSERT INTO users (username) VALUES (?)";
                 PreparedStatement userStatement = connection.prepareStatement(insertUserQuery);
                 userStatement.setString(1, "admin");
+                userStatement.setString(2, "Admin123");
                 userStatement.executeUpdate();
             }
         } catch (SQLException e) {
