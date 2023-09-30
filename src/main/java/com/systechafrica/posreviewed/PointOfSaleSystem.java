@@ -21,7 +21,7 @@ public class PointOfSaleSystem {
         this.cart = new ArrayList<>();
     }
 
-    private Connection connectToDatabase() {
+    private static Connection connectToDatabase() {
         String url = "jdbc:mysql://localhost:3309/pos";
         String user = "javase";
         String password = "javase";
@@ -136,32 +136,51 @@ public class PointOfSaleSystem {
         System.out.println("*********************************************************");
     }
 
-    public static void main(String[] args) {
-        logger.setLevel(Level.ALL);
-        User user = new User();
-        if (user.login()) {
-            PointOfSaleSystem pos = new PointOfSaleSystem();
-            Scanner scanner = new Scanner(System.in);
-
-            while (true) {
-                pos.displayMenu();
-                int choice = scanner.nextInt();
-
-                switch (choice) {
-                    case 1:
-                        pos.addItem();
-                        break;
-                    case 2:
-                        pos.makePayment();
-                        break;
-                    case 3:
-                        pos.displayReceipt();
-                        break;
-                    default:
-                        System.out.println("Invalid choice. Try again.");
-                }
+    private static void storeAdminUserInDatabase() {
+        try (Connection connection = connectToDatabase()) {
+            if (connection != null) {
+                String insertUserQuery = "INSERT INTO users (username) VALUES (?)";
+                PreparedStatement userStatement = connection.prepareStatement(insertUserQuery);
+                userStatement.setString(1, "admin");
+                userStatement.executeUpdate();
             }
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "Failed to insert admin user data into the database.", e);
         }
     }
 
+    public static void main(String[] args) {
+        logger.setLevel(Level.ALL);
+        try {
+            User user = new User();
+            if (user.login()) {
+                // Store admin user in the database
+                storeAdminUserInDatabase();
+
+                PointOfSaleSystem pos = new PointOfSaleSystem();
+                Scanner scanner = new Scanner(System.in);
+
+                while (true) {
+                    pos.displayMenu();
+                    int choice = scanner.nextInt();
+
+                    switch (choice) {
+                        case 1:
+                            pos.addItem();
+                            break;
+                        case 2:
+                            pos.makePayment();
+                            break;
+                        case 3:
+                            pos.displayReceipt();
+                            break;
+                        default:
+                            System.out.println("Invalid choice. Try again.");
+                    }
+                }
+            }
+        } catch (PointOfSaleException e) {
+            System.err.println(e.getMessage());
+        }
+    }
 }
