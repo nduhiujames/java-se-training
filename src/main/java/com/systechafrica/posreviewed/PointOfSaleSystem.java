@@ -34,6 +34,20 @@ public class PointOfSaleSystem {
         return connection;
     }
 
+    private static void storeAdminUserInDatabase() {
+        try (Connection connection = connectToDatabase()) {
+            if (connection != null) {
+                String insertUserQuery = "INSERT INTO users (username) VALUES (?)";
+                PreparedStatement userStatement = connection.prepareStatement(insertUserQuery);
+                userStatement.setString(1, "admin");
+                userStatement.setString(2, "Admin123");
+                userStatement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "Failed to insert admin user data into the database.", e);
+        }
+    }
+
     private void logMessage(Level level, String message, Exception e) {
         try {
             FileHandler fileHandler = new FileHandler("log1.txt", true);
@@ -58,64 +72,65 @@ public class PointOfSaleSystem {
     }
 
     public void addItem() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter Item Code: ");
-        String itemCode = scanner.nextLine();
-        System.out.print("Enter Quantity: ");
-        int quantity = scanner.nextInt();
-        System.out.print("Enter Unit Price: ");
-        double unitPrice = scanner.nextDouble();
+        try (Scanner scanner = new Scanner(System.in)) {
+            System.out.print("Enter Item Code: ");
+            String itemCode = scanner.nextLine();
+            System.out.print("Enter Quantity: ");
+            int quantity = scanner.nextInt();
+            System.out.print("Enter Unit Price: ");
+            double unitPrice = scanner.nextDouble();
 
-        MenuItem menuItem = new MenuItem(itemCode, quantity, unitPrice);
-        cart.add(menuItem);
-        logMessage(Level.INFO, "Item added: " + itemCode, null);
+            MenuItem menuItem = new MenuItem(itemCode, quantity, unitPrice);
+            cart.add(menuItem);
+            logMessage(Level.INFO, "Item added: " + itemCode, null);
+        }
     }
 
     public void makePayment() {
         double totalDue = 0.0;
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Item Code\tQuantity\tUnit Price\tTotalValue");
-        for (MenuItem menuItem : cart) {
-            System.out.printf("%s\t%d\t%.2f\t%.2f%n",
-                    menuItem.getItemCode(), menuItem.getQuantity(),
-                    menuItem.getUnitPrice(), menuItem.getTotalValue());
-            totalDue += menuItem.getTotalValue();
-        }
-
-        System.out.println("Total Due: $" + totalDue);
-        System.out.println("*********************************************************");
-
-        double amountGiven = 0.0;
-        while (amountGiven < totalDue) {
-            System.out.print("Enter the amount given by Customer:");
-            amountGiven = scanner.nextDouble();
-
-            if (amountGiven < totalDue) {
-                System.out.println("Insufficient payment. Please provide enough funds.");
+        try (Scanner scanner = new Scanner(System.in)) {
+            System.out.println("Item Code\tQuantity\tUnit Price\tTotalValue");
+            for (MenuItem menuItem : cart) {
+                System.out.printf("%s\t%d\t%.2f\t%.2f%n",
+                        menuItem.getItemCode(), menuItem.getQuantity(),
+                        menuItem.getUnitPrice(), menuItem.getTotalValue());
+                totalDue += menuItem.getTotalValue();
             }
-        }
 
-        double change = amountGiven - totalDue;
+            System.out.println("Total Due: $" + totalDue);
+            System.out.println("*********************************************************");
 
-        System.out.println("Change: $" + change);
-        System.out.println("*********************************************************");
-        System.out.println("THANK YOU FOR SHOPPING WITH US");
-        System.out.println("*********************************************************");
+            double amountGiven = 0.0;
+            while (amountGiven < totalDue) {
+                System.out.print("Enter the amount given by Customer:");
+                amountGiven = scanner.nextDouble();
 
-        cart.clear(); // Clear the cart after payment
-        // Insert payment data into the database
-        try (Connection connection = connectToDatabase()) {
-            if (connection != null) {
-                String insertQuery = "INSERT INTO payments (total_due, amount_given, change_amount) VALUES (?, ?, ?)";
-                PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
-                preparedStatement.setDouble(1, totalDue);
-                preparedStatement.setDouble(2, amountGiven);
-                preparedStatement.setDouble(3, change);
-                preparedStatement.executeUpdate();
+                if (amountGiven < totalDue) {
+                    System.out.println("Insufficient payment. Please provide enough funds.");
+                }
             }
-        } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Failed to insert payment data into the database.", e);
+
+            double change = amountGiven - totalDue;
+
+            System.out.println("Change: $" + change);
+            System.out.println("*********************************************************");
+            System.out.println("THANK YOU FOR SHOPPING WITH US");
+            System.out.println("*********************************************************");
+
+            cart.clear(); // Clear the cart after payment
+            // Insert payment data into the database
+            try (Connection connection = connectToDatabase()) {
+                if (connection != null) {
+                    String insertQuery = "INSERT INTO payments (total_due, amount_given, change_amount) VALUES (?, ?, ?)";
+                    PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
+                    preparedStatement.setDouble(1, totalDue);
+                    preparedStatement.setDouble(2, amountGiven);
+                    preparedStatement.setDouble(3, change);
+                    preparedStatement.executeUpdate();
+                }
+            } catch (SQLException e) {
+                logger.log(Level.SEVERE, "Failed to insert payment data into the database.", e);
+            }
         }
     }
 
@@ -136,20 +151,6 @@ public class PointOfSaleSystem {
         System.out.println("*********************************************************");
     }
 
-    private static void storeAdminUserInDatabase() {
-        try (Connection connection = connectToDatabase()) {
-            if (connection != null) {
-                String insertUserQuery = "INSERT INTO users (username) VALUES (?)";
-                PreparedStatement userStatement = connection.prepareStatement(insertUserQuery);
-                userStatement.setString(1, "admin");
-                userStatement.setString(2, "Admin123");
-                userStatement.executeUpdate();
-            }
-        } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Failed to insert admin user data into the database.", e);
-        }
-    }
-
     public static void main(String[] args) {
         logger.setLevel(Level.ALL);
         try {
@@ -159,24 +160,24 @@ public class PointOfSaleSystem {
                 storeAdminUserInDatabase();
 
                 PointOfSaleSystem pos = new PointOfSaleSystem();
-                Scanner scanner = new Scanner(System.in);
+                try (Scanner scanner = new Scanner(System.in)) {
+                    while (true) {
+                        pos.displayMenu();
+                        int choice = scanner.nextInt();
 
-                while (true) {
-                    pos.displayMenu();
-                    int choice = scanner.nextInt();
-
-                    switch (choice) {
-                        case 1:
-                            pos.addItem();
-                            break;
-                        case 2:
-                            pos.makePayment();
-                            break;
-                        case 3:
-                            pos.displayReceipt();
-                            break;
-                        default:
-                            System.out.println("Invalid choice. Try again.");
+                        switch (choice) {
+                            case 1:
+                                pos.addItem();
+                                break;
+                            case 2:
+                                pos.makePayment();
+                                break;
+                            case 3:
+                                pos.displayReceipt();
+                                break;
+                            default:
+                                System.out.println("Invalid choice. Try again.");
+                        }
                     }
                 }
             }
