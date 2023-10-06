@@ -4,3 +4,6 @@ Sep 29, 2023 8:06:30 PM com.systechafrica.posreviewed.PointOfSaleSystem logMessa
 INFO: Item added: 23
 Sep 29, 2023 8:06:39 PM com.systechafrica.posreviewed.PointOfSaleSystem logMessage
 INFO: Item added: 7788
+Successful login by admin
+Oct 06, 2023 7:06:56 AM com.systechafrica.posreviewed.PointOfSaleSystem logMessage
+INFO: Item added: 1

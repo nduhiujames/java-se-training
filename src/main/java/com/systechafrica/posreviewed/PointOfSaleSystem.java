@@ -95,7 +95,7 @@ public class PointOfSaleSystem {
                         menuItem.getItemCode(), menuItem.getQuantity(),
                         menuItem.getUnitPrice(), menuItem.getTotalValue());
                 totalDue += menuItem.getTotalValue();
-            }
+            } 
 
             System.out.println("Total Due: $" + totalDue);
             System.out.println("*********************************************************");
